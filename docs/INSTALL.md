@@ -14,10 +14,10 @@ You can also [build a Docker container](Docker.md), which would work on other op
 * Go 1.24
 * Node.js 22.x
 * [ubpf](https://github.com/iovisor/ubpf) a3e69808
-* [libbpf](https://github.com/libbpf/libbpf) 1.5.0 and [libxdp](https://github.com/xdp-project/xdp-tools) 1.4.3 (optional)
-* [liburing](https://github.com/axboe/liburing) 2.9
-* [Data Plane Development Kit (DPDK)](https://www.dpdk.org/) 84339a73 (pre-24.11 release)
-* [Storage Performance Development Kit (SPDK)](https://spdk.io/) 25.01-rc1
+* [libbpf](https://github.com/libbpf/libbpf) 1.5.1 and [libxdp](https://github.com/xdp-project/xdp-tools) 1.5.5 (optional)
+* [liburing](https://github.com/axboe/liburing) 2.11
+* [Data Plane Development Kit (DPDK)](https://www.dpdk.org/) 24.11.2
+* [Storage Performance Development Kit (SPDK)](https://spdk.io/) 25.05
 * [godoc](https://pkg.go.dev/golang.org/x/tools/cmd/godoc), [staticcheck](https://pkg.go.dev/honnef.co/go/tools/cmd/staticcheck), [shfmt](https://github.com/mvdan/sh) commands (optional)
 
 You can run the [ndndpdk-depends.sh](ndndpdk-depends.sh) script to install these dependencies, or refer to the script for specific configuration options.

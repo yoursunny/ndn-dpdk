@@ -33,7 +33,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/setup-dpdk
-          key: ${{ steps.deps.outputs.MESONVER }}_20250324
+          key: ${{ steps.deps.outputs.MESONVER }}_20250714
       - uses: yoursunny/setup-dpdk@main
         with:
           dpdk-version: ${{ steps.deps.outputs.DPDKVER }}
