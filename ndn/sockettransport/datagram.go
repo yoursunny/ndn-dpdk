@@ -28,7 +28,16 @@ type udpImpl struct {
 }
 
 func (udpImpl) Dial(network, local, remote string) (net.Conn, error) {
-	return greuse.Dial(network, local, remote)
+	nla, e := greuse.ResolveAddr(network, local)
+	if e != nil {
+		return nil, e
+	}
+
+	dialer := net.Dialer{
+		LocalAddr: nla,
+		Control:   reuseControl,
+	}
+	return dialer.Dial(network, remote)
 }
 
 func init() {

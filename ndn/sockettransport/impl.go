@@ -2,6 +2,8 @@ package sockettransport
 
 import (
 	"net"
+	"strings"
+	"syscall"
 
 	"github.com/gogf/greuse"
 )
@@ -24,7 +26,7 @@ type noLocalAddrDialer struct{}
 
 func (noLocalAddrDialer) Dial(network, _, remote string) (net.Conn, error) {
 	dialer := net.Dialer{
-		Control: greuse.Control,
+		Control: reuseControl,
 	}
 	return dialer.Dial(network, remote)
 }
@@ -38,7 +40,7 @@ func (localAddrRedialer) Redial(oldConn net.Conn) (net.Conn, error) {
 
 	dialer := net.Dialer{
 		LocalAddr: local,
-		Control:   greuse.Control,
+		Control:   reuseControl,
 	}
 	return dialer.Dial(remote.Network(), remote.String())
 }
@@ -51,7 +53,7 @@ func (noLocalAddrRedialer) Redial(oldConn net.Conn) (net.Conn, error) {
 	oldConn.Close() // ignore error
 
 	dialer := net.Dialer{
-		Control: greuse.Control,
+		Control: reuseControl,
 	}
 	return dialer.Dial(remote.Network(), remote.String())
 }
@@ -61,4 +63,11 @@ type nopRedialer struct{}
 
 func (nopRedialer) Redial(oldConn net.Conn) (net.Conn, error) {
 	return oldConn, nil
+}
+
+func reuseControl(network, address string, c syscall.RawConn) error {
+	if strings.HasPrefix(network, "unix") {
+		return nil
+	}
+	return greuse.Control(network, address, c)
 }
