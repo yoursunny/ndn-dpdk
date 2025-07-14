@@ -69,9 +69,7 @@ export class FacesList extends TimerRefreshComponent<{}, State> {
         <h3>{ethDev ? `${ethDev.name} (${ethDev.macAddr} ${ethDev.devInfo.driver} MTU=${ethDev.mtu} ${ethDev.rxGroups?.[0]?.__typename ?? "uninitialized"})` : "Non-Ethernet faces"}</h3>
         <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
           {faces.map((face) => {
-            const rxQueues = ethDev?.rxGroups.filter(
-              (rxg) => rxg.faces.some(({ id }) => id === face.id) && rxg.queue !== undefined,
-            ).map(({ queue }) => queue!);
+            const rxQueues = ethDev?.rxGroups.filter((rxg) => rxg.faces.some(({ id }) => id === face.id) && rxg.queue !== undefined).map(({ queue }) => queue!);
             return (
               <FaceGrid key={face.id} face={face} rxQueues={rxQueues?.length ? rxQueues : undefined}/>
             );

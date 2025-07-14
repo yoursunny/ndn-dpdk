@@ -158,8 +158,10 @@ export class Benchmark {
 
     const seenNdtIndices = new Set<number>();
     for (const label of tgNodeLabels) {
-      const locator = await this.prepareLocator(this.cF, label, this.env[`F_PORT_${label}`], this.env[`F_VLAN_${label}`],
-        this.env[`F_HWADDR_${label}`], this.env[`${label}_HWADDR_F`]);
+      const locator = await this.prepareLocator(
+        this.cF, label, this.env[`F_PORT_${label}`], this.env[`F_VLAN_${label}`],
+        this.env[`F_HWADDR_${label}`], this.env[`${label}_HWADDR_F`],
+      );
       const face = await this.cF.createFace(locator);
       this.state.face[label] = face;
 
@@ -195,8 +197,10 @@ export class Benchmark {
   private async startTrafficGen(label: TgNodeLabel): Promise<void> {
     const { nConsumerThreads } = this.opts;
     const ctrl = this[`c${label}`];
-    const locator = await this.prepareLocator(ctrl, label, this.env[`${label}_PORT_F`], this.env[`${label}_VLAN_F`],
-      this.env[`${label}_HWADDR_F`], this.env[`F_HWADDR_${label}`]);
+    const locator = await this.prepareLocator(
+      ctrl, label, this.env[`${label}_PORT_F`], this.env[`${label}_VLAN_F`],
+      this.env[`${label}_HWADDR_F`], this.env[`F_HWADDR_${label}`],
+    );
     const result = await ctrl.startTrafficGen({
       face: locator,
       ...this.makeProducerConfig(label),

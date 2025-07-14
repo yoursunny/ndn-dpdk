@@ -65,10 +65,10 @@ export class TgFace extends Component<Props> {
         </h3>
         <svg style="background: #ffffff; width: 500px; font-size: 16px;" viewBox={`0 0 500 ${height}`}>
           {(producerY === consumerY ? [producerY] : [producerY, consumerY]).map((y) => (
-            <>
+            <Fragment key={y}>
               <line key={`${y}L`} x1={100} y1={rxtxY + 25} x2={150} y2={y + 25} stroke="#aaaaaa" stroke-width="1"/>
               <line key={`${y}R`} x1={400} y1={rxtxY + 25} x2={350} y2={y + 25} stroke="#aaaaaa" stroke-width="1"/>
-            </>
+            </Fragment>
           ))}
           <WorkerShape role="RX" label={`input ${gatherWorkerIDs(rxLoops)}`} x={0} y={rxtxY} width={100} height={50}/>
           <WorkerShape role="TX" label={`output ${gatherWorkerIDs([txLoop])}`} x={400} y={rxtxY} width={100} height={50}/>

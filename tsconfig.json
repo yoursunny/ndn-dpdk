@@ -6,22 +6,24 @@
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
+    "libReplacement": false,
     "module": "ES2022",
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
     "noEmitOnError": true,
-    "noImplicitAny": true,
+    "noImplicitOverride": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "outDir": "build/js",
     "rootDir": "js",
     "skipLibCheck": true,
     "strict": true,
-    "target": "ES2023"
+    "target": "ES2024",
+    "verbatimModuleSyntax": true
   },
   "include": [
     "js/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "**/node_modules"
   ]
 }

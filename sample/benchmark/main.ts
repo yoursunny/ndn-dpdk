@@ -7,12 +7,14 @@ import { serve } from "./serve";
 
 await yargs(hideBin(process.argv))
   .scriptName("ndndpdk-benchmark")
-  .command("serve", "serve webapp",
+  .command(
+    "serve", "serve webapp",
     (argv) => argv.option("port", { default: 3333, desc: "listen port", type: "number" }),
     async (argv) => {
       await serve(argv.port);
     },
-  ).command("benchmark", "run benchmark on CLI (pass BenchmarkOptions to stdin)",
+  ).command(
+    "benchmark", "run benchmark on CLI (pass BenchmarkOptions to stdin)",
     (argv) => argv
       .option("count", { alias: "c", default: 1e3, desc: "iteration count", type: "number" }),
     async (argv) => {

@@ -1,5 +1,5 @@
-export * from "./consumer.js";
-export * from "./fetch.js";
-export * from "./fileserver.js";
-export * from "./producer.js";
-export * from "./tg.js";
+export type * from "./consumer.js";
+export type * from "./fetch.js";
+export type * from "./fileserver.js";
+export type * from "./producer.js";
+export type * from "./tg.js";
