@@ -235,17 +235,16 @@ APT_PKGS=(
   python3-pip
   python3-pyelftools
   uuid-dev
-  yamllint
 )
 
 DISTRO=$(lsb_release -sc)
 case $DISTRO in
   jammy) ;;
   noble)
-    APT_PKGS+=(meson)
+    APT_PKGS+=(meson yamllint)
     ;;
   bookworm)
-    APT_PKGS+=(meson)
+    APT_PKGS+=(meson yamllint)
     ;;
   *)
     echo "Distro ${DISTRO} is not supported by this script."
@@ -356,6 +355,9 @@ if ! command -v meson >/dev/null; then
   cd "$(github_download mesonbuild/meson 1.7.0)"
   ./packaging/create_zipapp.py --outfile meson.pyz .
   $SUDO install -m0755 meson.pyz /usr/local/bin/meson
+fi
+if ! command -v yamllint >/dev/null; then
+  $SUDO pip install --break-system-packages yamllint
 fi
 
 if [[ $GOVER != 0 ]]; then
