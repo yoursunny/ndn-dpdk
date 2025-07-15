@@ -167,6 +167,7 @@ export class GqlGenControl extends GqlControlBase {
     for await (const cnt of sub) {
       if (t1 > 0 && Number(cnt.elapsed) >= t1) {
         c1 = cnt;
+        t1 = -1;
       }
       if (Number(cnt.elapsed) >= t2 || cnt.finished) {
         return [c1, cnt];
